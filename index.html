@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>JavaScript Stopwatch</title>
+        <style type="text/css">
+            body {
+                background-image: url("deer.jpg");
+                color: #fff;
+                display: flex;
+                flex-direction: column;
+                height: 100vh;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .stopwatch {
+
+                font-size: 15em;
+                font-family: monospace;
+            }
+
+            ul {
+                margin: 0;
+                padding: 0;
+            }
+
+            ul li {
+                list-style: none;
+                 padding: 10px 0;
+            }
+            
+            .button {
+                background-color: #000;
+                color: #f6f6f6;
+                padding: 20px;
+                border-radius: 25px;
+            }
+
+            .laps {
+                font-size: 20px;
+            }
+        </style>
+    </head>
+    <body>
+            <h1>JavaScript Stopwatch</h1>
+            <div class="controls">
+                <button class="button" onclick="start()">Start</button>
+                <button class="button" onclick="lap()">Lap</button>
+                <button class="button" onclick="pause()">Pause</button>
+                <button class="button" onclick="deleteLaps()">Reset</button>
+                <button class="button" onclick="stop()">Stop</button>
+            </div>
+            <div class="stopwatch">00:00:00</div>
+            <ul class="laps"></ul>
+    </body>
+
+    <script>
+        var ms = 0, s = 0, m = 0;
+        var timer;
+
+        var stopwatchElement = document.querySelector('.stopwatch');
+        var lapsContainer = document.querySelector('.laps');
+
+        function start() {
+            if(!timer) {
+                timer = setInterval(run, 10);
+            }
+        }
+
+        function run() {
+            stopwatchElement.textContent = ( m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s) + ":" + ( ms < 10 ? "0" + ms : ms);
+            ms++;
+            if(ms >= 100) {
+                ms = 0;
+                s++;
+            }
+            if(s >= 60) {
+                s = 0;
+                m++;
+            }
+        }
+
+        function lap() {
+            if(timer) {
+                var li = document.createElement('li');
+                li.innerText = ( m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s) + ":" + ( ms < 10 ? "0" + ms : ms);
+                lapsContainer.appendChild(li);
+            }
+        }
+
+        function pause() {
+            clearInterval(timer);
+            timer = false;
+        }
+
+        function deleteLaps() {
+            lapsContainer.innerHTML = '';
+        }
+
+        function stop() {
+            clearInterval(timer);
+            timer = false;
+            ms = 0; s = 0; m = 0;
+            stopwatchElement.textContent = ( m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s) + ":" + ( ms < 10 ? "0" + ms : ms);
+        }
+    </script>
+</html>

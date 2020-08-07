@@ -15,7 +15,6 @@
             }
 
             .stopwatch {
-
                 font-size: 15em;
                 font-family: monospace;
             }
@@ -48,7 +47,7 @@
                 <button class="button" onclick="start()">Start</button>
                 <button class="button" onclick="lap()">Lap</button>
                 <button class="button" onclick="pause()">Pause</button>
-                <button class="button" onclick="deleteLaps()">Reset</button>
+                <button class="button" onclick="resetLaps()">Reset laps</button>
                 <button class="button" onclick="stop()">Stop</button>
             </div>
             <div class="stopwatch">00:00:00</div>
@@ -94,7 +93,7 @@
             timer = false;
         }
 
-        function deleteLaps() {
+        function resetLaps() {
             lapsContainer.innerHTML = '';
         }
 
